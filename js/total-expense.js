@@ -1,1 +1,3 @@
-console.log('js file connected');
+function disable (button) {
+    button.disabled = true; 
+}
