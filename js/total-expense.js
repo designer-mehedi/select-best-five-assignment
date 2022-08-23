@@ -3,12 +3,13 @@ function disable(button) {
     button.style.backgroundColor = '#344FA1';
     button.style.color = 'gray';  
 }
+
 const playerArray = [];
 
 function addedPlayers(player) {
     const listItem = document.getElementById('list-of-players'); 
-
     listItem.innerText = '';
+
     for (let i = 0; i < playerArray.length; i++ ) {
         const playerName = playerArray[i];
         const li = document.createElement('li');
@@ -27,8 +28,6 @@ function updatePlayerName (elementId) {
         return;
     }
 
-    // console.log(playerArray);
-    // console.log(playerArray.length);
     const count = document.getElementById('counter');
     count.innerText = playerArray.length; 
     addedPlayers(playerArray);
@@ -38,35 +37,25 @@ function updatePlayerName (elementId) {
 
 document.getElementById('button-1').addEventListener('click', function (){
     const player1 = updatePlayerName('player-1');
-    // alert(player1);
 })
 document.getElementById('button-2').addEventListener('click', function (){
     const player2 = updatePlayerName('player-2');
-    // alert(player2);
 })
 document.getElementById('button-3').addEventListener('click', function (){
     const player3 = updatePlayerName('player-3');
-    // alert(player3);
 })
 document.getElementById('button-4').addEventListener('click', function (){
     const player4 = updatePlayerName('player-4');
-    // alert(player4);
 })
 document.getElementById('button-5').addEventListener('click', function (){
     const player5 = updatePlayerName('player-5');
-    // alert(player5);
 })
 document.getElementById('button-6').addEventListener('click', function (){
     const player6 = updatePlayerName('player-6');
-    // alert(player6);
 })
 
-
 document.getElementById('player-expense-btn').addEventListener('click', function () {
-
-    const perPlayerCostElement = document.getElementById('per-player-cost');
-    const perPlayerCostElementString = perPlayerCostElement.value;
-    const perPlayerCost = parseInt(perPlayerCostElementString);
+    const perPlayerCost = getInputFieldValueById('per-player-cost'); 
 
     if (isNaN(perPlayerCost)) {
         alert('Please enter amount');
@@ -82,25 +71,12 @@ document.getElementById('player-expense-btn').addEventListener('click', function
     const countString = countElement.innerText;
     const count = parseInt(countString); 
     const perPlayerExpense = perPlayerCost * count;
-    console.log(perPlayerExpense); 
+    const playerExpense = getElementValueById('player-expense'); 
+    setElementValueById('player-expense', perPlayerExpense);
     
-    
-    const playerExpenseElement = document.getElementById('player-expense');
-    const playerExpenseElementString = playerExpenseElement.innerText;
-    const playerExpense = parseInt(playerExpenseElementString); 
-    
-    playerExpenseElement.innerText = perPlayerExpense;
-
-
     document.getElementById('total-btn').addEventListener('click', function(){
-
-        const managerExpenseElement = document.getElementById('manager-expense');
-        const managerExpenseElementString = managerExpenseElement.value;
-        const managerExpense = parseInt(managerExpenseElementString);
-
-        const coachExpenseElement = document.getElementById('coach-expense');
-        const coachExpenseElementString = coachExpenseElement.value;
-        const coachExpense = parseInt(coachExpenseElementString);
+        const managerExpense = getInputFieldValueById('manager-expense'); 
+        const coachExpense = getInputFieldValueById('coach-expense');
 
         if (isNaN(managerExpense && coachExpense)) {
             alert('Please enter amount');
@@ -113,15 +89,9 @@ document.getElementById('player-expense-btn').addEventListener('click', function
         }
 
         const totalCost = perPlayerExpense + managerExpense + coachExpense; 
-
-        const totalExpenseElement = document.getElementById('total-expense');
-        const totalExpenseElementString = totalExpenseElement.innerText;
-        const totalExpense = parseInt(totalExpenseElementString); 
-
-        totalExpenseElement.innerText = totalCost; 
+        const totalExpense = getElementValueById('total-expense'); 
+        setElementValueById('total-expense', totalCost);
     });
-
-
 })
 
 
